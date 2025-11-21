@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Vijith Varatharajan</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root{
+      --accent: #e100ff;
+      --bg-dark: #0d001a;
+      --bg-light: #f5f2ff;
+      --card-bg-dark: rgba(255,255,255,0.06);
+      --card-bg-light: rgba(255,255,255,0.94);
+      --text-dark: #e6e6f0;
+      --text-light: #230023;
+      --particle-dark: #ff4dff;
+      --particle-light: #4a6cff;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+
+    :root.light-mode {
+      --bg: var(--bg-light);
+      --card-bg: var(--card-bg-light);
+      --text-color: var(--text-light);
+      --particle-color: var(--particle-light);
+    }
+
+    :root {
+      --bg: var(--bg-dark);
+      --card-bg: var(--card-bg-dark);
+      --text-color: var(--text-dark);
+      --particle-color: var(--particle-dark);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text-color);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition: background 0.45s ease, color 0.45s ease;
+    }
+
+    #tsparticles {
+      position: fixed;
+      inset: 0;
+      z-index: 0 !important;
+      pointer-events: none;
+      opacity: 1 !important;
+    }
+
+    .navbar-custom {
+      background: linear-gradient(135deg, #2a0050, #4c0080, #2a0050);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      z-index: 12;
+    }
+    :root.light-mode .navbar-custom {
+      background: linear-gradient(135deg, #ffffff, #f3e8ff);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .navbar-custom .nav-link { color: var(--text-color) !important; font-weight:500; }
+    .navbar-custom .navbar-brand { color: var(--text-color) !important; font-weight:700; }
+
+    .container-main {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      padding: 64px 20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .about-grid {
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      transition: background 0.45s ease, color 0.45s ease;
+    }
+
+    .photo-wrap {
+      width:100%;
+      aspect-ratio: 3/4;
+      border-radius: 12px;
+      overflow: hidden;
+      display:block;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.45), 0 0 10px rgba(225,0,255,0.15);
+    }
+    .photo-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    .small-meta { font-size:0.95rem; color: rgba(255,255,255,0.85); margin-bottom:10px; }
+    :root.light-mode .small-meta { color: rgba(10,6,18,0.85); }
+
+    .badge-skill { background: rgba(255,255,255,0.08); color: var(--text-color); padding:6px 10px; border-radius:999px; margin:6px 6px 6px 0; display:inline-block; font-size:0.85rem; border:1px solid rgba(255,255,255,0.04); }
+
+    .card-main {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    h1.display { margin:0 0 8px 0; font-size:clamp(24px,4vw,36px); }
+    p.lead { margin:0 0 16px 0; color: rgba(255,255,255,0.9); }
+
+.timeline {
+  margin: 18px 0 0 0;
+  padding-left: 0;
+  position: relative;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 22px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(225,0,255,0.25);
+}
+
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 22px;
+  width: 2px;
+  height: calc(100% - 22px);
+  background: rgba(255,255,255,0.12);
+}
+
+:root.light-mode .timeline-item::before {
+  background: var(--particle-light);
+  box-shadow: 0 0 6px rgba(74,108,255,0.25);
+}
+
+:root.light-mode .timeline-item::after {
+  background: rgba(0,0,0,0.12);
+}
+
+    .cards-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:14px; margin-top:12px; }
+    .mini-card { background: rgba(255,255,255,0.03); padding:14px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); }
+
+    .image-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:8px; margin-top:10px; }
+    .image-grid img { width:100%; height:100px; object-fit:cover; border-radius:8px; display:block; }
+
+    footer { margin-top:30px; text-align:center; color:var(--text-color); opacity:0.9; font-size:0.9rem; }
+
+    .muted { color: rgba(255,255,255,0.7); }
+    :root.light-mode .muted { color: rgba(0,0,0,0.6); }
+
+    * { transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease; }
+
+    .mini-card:hover { transform: translateY(-6px); transition: transform 0.25s ease; box-shadow: 0 16px 30px rgba(0,0,0,0.18); }
+
+    .social-icons a { font-size:1.4rem; margin-right:12px; color:var(--text-color); transition: color 0.25s ease, transform 0.25s ease; }
+    .social-icons a:hover { color: var(--accent); transform: translateY(-3px); }
+
+    .btn-resume { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--text-color); padding:8px 12px; border-radius:10px; }
+    .btn-resume:hover { background: rgba(225,0,255,0.06); color: #fff; }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="themeFlash"></div>
+
+  <div id="tsparticles"></div>
+
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-4">
+      <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navmenuAbout">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenuAbout">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link px-3" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="aboutme.html">About Me</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="projects.html">My Works</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="form-check form-switch ms-3">
+          <input class="form-check-input" type="checkbox" id="themeToggle">
+          <label class="form-check-label" for="themeToggle" style="color:var(--text-color)"><i class="bi bi-sun-fill" id="themeIcon"></i></label>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container-main">
+    <div class="about-grid">
+
+      <aside class="panel">
+        <div class="photo-wrap">
+          <img src="IMG_4839.jpg" alt="Vijith Varatharajan">
+        </div>
+
+        <div>
+          <h3 style="margin:0 0 6px 0">Vijith Varatharajan</h3>
+          <div class="small-meta">Chennai, India • Writer • Researcher • Developer</div>
+
+          <div style="margin-top:10px">
+            <a class="btn btn-resume mb-2" href="Resume.pdf" download>
+              <i class="bi bi-download"></i> Download Résumé
+            </a>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="muted mb-2">Quick contact</div>
+            <div class="social-icons">
+              <a href="mailto:vijithvrajan@gmail.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+              <a href="https://linkedin.com" title="LinkedIn" target="_blank"><i class="bi bi-linkedin"></i></a>
+              <a href="https://github.com/Penguin-VV007" title="GitHub" target="_blank"><i class="bi bi-github"></i></a>
+              <a href="https://instagram.com" title="Instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+              <a href="https://medium.com/@vijithvaratharajan" title="Medium" target="_blank"><i class="bi bi-medium"></i></a>
+            </div>
+          </div>
+
+          <hr style="border-color: rgba(255,255,255,0.04); margin-top:18px">
+
+          <div>
+            <div class="muted">Languages</div>
+            <div style="margin-top:8px">
+              <span class="badge-skill">English</span>
+              <span class="badge-skill">Tamil</span>
+              <span class="badge-skill">Spanish</span>
+              <span class="badge-skill">Malayalam (conversational)</span>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="muted">Core Skills</div>
+            <div style="margin-top:8px">
+              <span class="badge-skill">Academic Writing</span>
+              <span class="badge-skill">Content Writing</span>
+              <span class="badge-skill">Research</span>
+              <span class="badge-skill">Python / C++</span>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <section class="card-main">
+
+        <h1 class="display">About Me</h1>
+        <p class="lead">I write, research, teach, and build — with a strong focus on literature, culture, storytelling, and technology. I graduated M.A. in English Literature from The English and Foreign Languages University and earlier emerged as the topper of my college from the University of Madras for my B.A. More details in the sections below (and my résumé).</p>
+
+        <h4 style="margin-top:10px">Journey</h4>
+        <div class="timeline" aria-hidden="false">
+
+          <div class="timeline-item">
+            <strong>2023 — M.A., English Literature — EFLU, Shillong</strong>
+            <div class="muted">Graduated Summa cum laude. GPA: 7.15/9.0</div>
+            <div style="margin-top:6px">Thesis and coursework focused on literary theory, constructivist pedagogy, postcoloniality, romanticism, and more. Active in film club and festival curation.</div>
+          </div>
+
+          <div class="timeline-item">
+            <strong>2021 — B.A., English Literature — University of Madras</strong>
+            <div class="muted">University Topper. GPA: 7.1/10</div>
+            <div style="margin-top:6px">Active in quizzes and cultural events; early involvement in community service (NSS).</div>
+          </div>
+
+          <div class="timeline-item">
+            <strong>2019 — Internship at Utter (EdTech)</strong>
+            <div class="muted">Worked remotely; supported conversational English learners and pedagogy.</div>
+            <div style="margin-top:6px">Experience in learner motivation, multilingual comparisons, and instruction design.</div>
+          </div>
+
+          <div class="timeline-item">
+            <strong>2022–2023 — Freelance Content Writer</strong>
+            <div class="muted">Wrote articles across tech, health, and entertainment; learned SEO, reach strategies, and structural writing.</div>
+          </div>
+
+        </div>
+
+        <div style="margin-top:18px" class="cards-grid">
+          <div class="mini-card">
+            <h5 style="margin-top:0">Honors & Awards</h5>
+            <ul style="margin:8px 0 0 18px;">
+              <li>Summa cum laude — M.A., EFLU.</li>
+              <li>University Topper — B.A., University of Madras.</li>
+              <li>Multiple medals in literature-related MOOCs (IIT Kanpur, IIT Madras).</li>
+            </ul>
+          </div>
+
+          <div class="mini-card">
+            <h5 style="margin-top:0">Certifications</h5>
+            <ul style="margin:8px 0 0 18px;">
+              <li>Spanish DELE A2 (Instituto Cervantes)</li>
+              <li>CS50x (ongoing) — Harvard</li>
+              <li>Multiple literature & philosophy MOOCs (Coursera)</li>
+            </ul>
+          </div>
+
+          <div class="mini-card">
+            <h5 style="margin-top:0">Publications & Projects</h5>
+            <ul style="margin:8px 0 0 18px;">
+              <li>Short story in international anthology “Jeremiad of Hearts”.</li>
+              <li>Self-published short story “Eight Minutes” (Amazon KDP contest).</li>
+              <li>Organized Cherry Orchard Film Festival (EFLU, 2022).</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div style="margin-top:20px; display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
+          <div style="flex:1; min-width:240px;">
+            <h5>Interests</h5>
+            <p class="muted">Writing, reading across genres, world cinema (especially horror), gaming, travel, linguistics, chess, rubik's cubes and philately.</p>
+
+            <div class="image-grid" aria-hidden="false">
+              <img src="worldcinema.jpg" alt="World cinema">
+              <img src="stamps.jpg" alt="Philately">
+              <img src="gaming.jpg" alt="Gaming">
+              <img src="cubes.jpeg" alt="Rubik's Cubes">
+              <img src="writing.png" alt="Writing">
+              <img src="chess.jpg" alt="Chess">
+            </div>
+          </div>
+
+          <div style="width:320px;">
+            <h5>Technical & Software</h5>
+            <div style="margin-top:8px">
+              <span class="badge-skill">C / C++</span>
+              <span class="badge-skill">Python</span>
+              <span class="badge-skill">HTML / CSS / JS</span>
+              <span class="badge-skill">Flask</span>
+              <span class="badge-skill">SQLite</span>
+            </div>
+
+            <h5 style="margin-top:16px">Community</h5>
+            <p class="muted">NSS activity, film club leadership, quiz society, model UN, and volunteer projects (blood drives, cleanups).</p>
+
+            <h5 style="margin-top:12px">Fun facts</h5>
+            <ul style="margin:6px 0 0 18px;">
+              <li>Can solve 2x2–5x5 Rubik's cubes</li>
+              <li>Collected stamps from 10+ countries</li>
+              <li>Presented papers at national conferences</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:20px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+          <div>
+            <a href="contact.html" class="btn btn-resume"><i class="bi bi-envelope-fill"></i> Get in touch</a>
+            <a href="Resume.pdf" class="btn btn-resume" download><i class="bi bi-file-earmark-person"></i> Download Résumé</a>
+          </div>
+
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer style="position:relative; z-index:2; padding:26px 0;">
+    © Vijith Varatharajan 2025
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+
+    function currentParticleColor(){
+      return getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim() || '#ff4dff';
+    }
+
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 110, density: { enable: true, area: 900 } },
+        color: { value: currentParticleColor() },
+        shape: { type: "circle" },
+        opacity: { value: 0.7 },
+        size: { value: { min: 1, max: 4 } },
+        links: {
+          enable: true,
+          color: currentParticleColor(),
+          distance: 140,
+          opacity: 0.35,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 0.8,
+          outModes: "bounce"
+        }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" }
+        },
+        modes: { repulse: { distance: 120 }, push: { quantity: 3 } }
+      },
+      detectRetina: true
+    });
+
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeFlash = document.getElementById("themeFlash");
+
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.classList.add("light-mode");
+      themeToggle.checked = true;
+      themeIcon.classList.remove("bi-sun-fill");
+      themeIcon.classList.add("bi-moon-stars-fill");
+    }
+
+    function playFlash(){
+      themeFlash.classList.add("theme-flash");
+      setTimeout(()=> themeFlash.classList.remove("theme-flash"), 500);
+    }
+
+    themeToggle.addEventListener("change", () => {
+      document.documentElement.classList.toggle("light-mode");
+      playFlash();
+
+      if (document.documentElement.classList.contains("light-mode")) {
+        themeIcon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
+        localStorage.setItem("theme", "light");
+      } else {
+        themeIcon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
+        localStorage.setItem("theme", "dark");
+      }
+
+      try {
+        const current = currentParticleColor();
+        const existing = tsParticles.domItem(0);
+        if (existing) {
+          existing.options.particles.color.value = current;
+          existing.options.particles.links.color = current;
+          existing.refresh();
+        }
+      } catch(e){
+        console.warn("Could not refresh particles color:", e);
+      }
+    });
+  </script>
+
+<style>
+    .theme-flash {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.85), rgba(255,255,255,0) 60%);
+      opacity: 0;
+      animation: flashAnim 0.5s ease-out;
+      z-index: 9999;
+    }
+    @keyframes flashAnim { from { opacity: 0.8 } to { opacity: 0 } }
+</style>
+
+</body>
+
+</html>

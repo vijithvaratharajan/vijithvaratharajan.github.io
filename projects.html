@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>My Works – Vijith Varatharajan</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --accent: #e100ff;
+      --bg-dark: #0d001a;
+      --bg-light: #f5f2ff;
+      --card-bg-dark: rgba(255,255,255,0.08);
+      --card-bg-light: rgba(0,0,0,0.04);
+      --text-dark: #e6e6f0;
+      --text-light: #230023;
+    }
+
+    :root.light-mode {
+      --bg: var(--bg-light);
+      --card-bg: var(--card-bg-light);
+      --text-color: var(--text-light);
+    }
+
+    :root {
+      --bg: var(--bg-dark);
+      --card-bg: var(--card-bg-dark);
+      --text-color: var(--text-dark);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text-color);
+      font-family: Inter, system-ui, sans-serif;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    #tsparticles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 1 !important;
+    }
+
+    .navbar-custom {
+      background: linear-gradient(135deg, #2a0050, #4c0080, #2a0050);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      z-index: 10;
+    }
+    :root.light-mode .navbar-custom {
+      background: linear-gradient(135deg, #ffffff, #f3e8ff);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .navbar-custom .nav-link, .navbar-custom .navbar-brand {
+      color: var(--text-color) !important;
+      font-weight: 500;
+    }
+
+    .container-main {
+      position: relative;
+      z-index: 2;
+      padding: 60px 20px;
+      min-height: 100vh;
+    }
+
+    h1.section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 24px;
+    }
+
+.story-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 10px;
+  width: 180px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  transition: transform 0.25s ease;
+  cursor: pointer;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+}
+
+.story-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  padding: 6px;
+}
+
+
+.story-title {
+  padding: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.stories-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: flex-start;
+}
+
+
+  .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .project-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 20px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 42px rgba(0,0,0,0.5);
+}
+
+    .project-name {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .project-description {
+      margin-bottom: 12px;
+      color: var(--text-color);
+    }
+    .project-links a {
+      margin-right: 12px;
+      color: var(--text-color);
+      transition: color 0.2s;
+    }
+    .project-links a:hover {
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      color: var(--text-color);
+      z-index: 2;
+    }
+
+    * {
+      transition: background-color 0.45s ease, color 0.45s ease, box-shadow 0.45s ease, transform 0.25s ease;
+    }
+
+.story-card {
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+.story-card:hover {
+  transform: rotateY(8deg) rotateX(6deg) translateY(-6px);
+  transition: transform 0.25s ease;
+}
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="tsparticles"></div>
+
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-4">
+      <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navmenuProjects">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenuProjects">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link px-3" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="aboutme.html">About Me</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="projects.html">My Works</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="form-check form-switch ms-3">
+          <input class="form-check-input" type="checkbox" id="themeToggle">
+          <label class="form-check-label" for="themeToggle"><i class="bi bi-sun-fill" id="themeIcon"></i></label>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="container-main">
+
+    <section id="stories">
+      <h1 class="section-title">Published Works</h1>
+      <div class="stories-grid">
+  <div class="story-card">
+    <img src="eightminutes.jpg" alt="Eight Minutes">
+    <div class="story-title">Eight Minutes</div>
+  </div>
+
+  <div class="story-card">
+    <img src="pulppoetry.jpg" alt="Jeremiad of Hearts">
+    <div class="story-title">Pulp Poetry</div>
+  </div>
+
+  <div class="story-card">
+    <img src="jeremiad.jpg" alt="Jeremiad of Hearts">
+    <div class="story-title">Jeremiad of Hearts</div>
+  </div>
+
+      </div>
+    </section>
+
+    <section id="code-projects" style="margin-top: 60px;">
+      <h1 class="section-title">Coding Projects</h1>
+      <div class="projects-grid" id="projectsGrid">
+      </div>
+    </section>
+
+  </main>
+
+  <footer>© Vijith Varatharajan 2025</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+  <script>
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+      themeToggle.checked = true;
+      themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
+    }
+    themeToggle.addEventListener('change', () => {
+      document.documentElement.classList.toggle('light-mode');
+      if (document.documentElement.classList.contains('light-mode')) {
+        themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
+        localStorage.setItem('theme', 'light');
+      } else {
+        themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 120, density: { enable: true, area: 800 } },
+        color: { value: getComputedStyle(document.documentElement).getPropertyValue('--particle-color') || '#ff4dff' },
+        shape: { type: "circle" },
+        opacity: { value: 0.7 },
+        size: { value: { min: 1, max: 4 } },
+        links: {
+          enable: true,
+          color: getComputedStyle(document.documentElement).getPropertyValue('--particle-color') || '#ff4dff',
+          distance: 150,
+          opacity: 0.4,
+          width: 1
+        },
+        move: { enable: true, speed: 0.8, outModes: "bounce" }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" }
+        },
+        modes: { repulse: { distance: 120 }, push: { quantity: 3 } }
+      },
+      detectRetina: true
+    });
+
+
+    async function loadGitHubProjects() {
+      const username = 'Penguin-VV007';
+      const url = `https://api.github.com/users/${username}/repos?sort=updated`;
+      try {
+        const res = await fetch(url);
+        const repos = await res.json();
+        const grid = document.getElementById('projectsGrid');
+        repos.forEach(repo => {
+          const card = document.createElement('div');
+          card.className = 'project-card';
+          const name = document.createElement('div');
+          name.className = 'project-name';
+          name.textContent = repo.name;
+          const desc = document.createElement('div');
+          desc.className = 'project-description';
+          desc.textContent = repo.description || 'No description provided.';
+          const links = document.createElement('div');
+          links.className = 'project-links';
+          const repoLink = document.createElement('a');
+          repoLink.href = repo.html_url;
+          repoLink.target = '_blank';
+          repoLink.innerHTML = '<i class="bi bi-github"></i> View Repo';
+          links.appendChild(repoLink);
+          card.appendChild(name);
+          card.appendChild(desc);
+          card.appendChild(links);
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error('Error loading GitHub repos', err);
+      }
+    }
+
+    loadGitHubProjects();
+  </script>
+
+</body>
+
+</html>
