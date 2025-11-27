@@ -117,13 +117,17 @@
 
     .badge-skill { background: rgba(255,255,255,0.08); color: var(--text-color); padding:6px 10px; border-radius:999px; margin:6px 6px 6px 0; display:inline-block; font-size:0.85rem; border:1px solid rgba(255,255,255,0.04); }
 
-    .card-main {
-      background: var(--card-bg);
-      border-radius: 14px;
-      padding: 22px;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
-    }
+  
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
     h1.display { margin:0 0 8px 0; font-size:clamp(24px,4vw,36px); }
     p.lead { margin:0 0 16px 0; color: rgba(255,255,255,0.9); }
@@ -278,7 +282,7 @@
         </div>
       </aside>
 
-      <section class="card-main">
+      <section class="card-main glass-card">
 
         <h1 class="display">About Me</h1>
         <p class="lead">I write, research, teach, and build — with a strong focus on literature, culture, storytelling, and technology. I graduated M.A. in English Literature from The English and Foreign Languages University and earlier emerged as the topper of my college from the University of Madras for my B.A. More details in the sections below (and my résumé).</p>
@@ -311,7 +315,7 @@
 
         </div>
 
-        <div style="margin-top:18px" class="cards-grid">
+        <div style="margin-top:18px" class="cards-grid glass-card">
           <div class="mini-card">
             <h5 style="margin-top:0">Honors & Awards</h5>
             <ul style="margin:8px 0 0 18px;">
@@ -321,7 +325,7 @@
             </ul>
           </div>
 
-          <div class="mini-card">
+          <div class="mini-card glass-card">
             <h5 style="margin-top:0">Certifications</h5>
             <ul style="margin:8px 0 0 18px;">
               <li>Spanish DELE A2 (Instituto Cervantes)</li>
@@ -335,7 +339,7 @@
             </ul>
           </div>
 
-          <div class="mini-card">
+          <div class="mini-card glass-card">
             <h5 style="margin-top:0">Publications & Projects</h5>
             <ul style="margin:8px 0 0 18px;">
               <li>Short story in an international anthology “Jeremiad of Hearts”.</li>
