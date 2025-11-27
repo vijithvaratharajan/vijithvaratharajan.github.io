@@ -197,6 +197,94 @@
     .btn-resume { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--text-color); padding:8px 12px; border-radius:10px; }
     .btn-resume:hover { background: rgba(225,0,255,0.06); color: #fff; }
 
+    /* ===== Fix: remove ghost background & restore centering ===== */
+/* 1) Ensure page background is the site background (not a big translucent card) */
+body {
+  background: var(--bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* 2) Remove any accidental large background/backdrop on main wrappers */
+.container-main,
+.about-section,
+.section-wrapper,
+.main-card,
+.content-box,
+.left-panel-wrapper,
+.right-panel-wrapper {
+  background: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 3) Restore the intended centered grid and limit width (keeps content centered) */
+.container-main {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding: 64px 20px !important;
+  box-sizing: border-box;
+}
+
+/* about-grid should be the content box: constrain width and center it */
+.about-grid {
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: 360px 1fr !important;
+  gap: 28px !important;
+}
+
+/* mobile fallback */
+@media (max-width: 980px) {
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 12px !important;
+  }
+}
+
+/* 4) Ensure the left & right panels keep their glass style (no big parent overlay) */
+.panel,
+.card-main,
+.glass-card,
+.about-card,
+.mini-card {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45) !important;
+  padding: 18px !important;
+  border-radius: 14px !important;
+}
+
+/* 5) If a wrapper still forces full-width left alignment, center it */
+.container-main > * {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 6) Fine tune: keep small elements from stretching full width */
+.panel .photo-wrap,
+.panel > div,
+.card-main {
+  margin: 0;
+}
+
+/* 7) Debugging aid (remove after verifying) — comment out if not needed
+   Adds a faint outline so you can see which elements still have backgrounds.
+*/
+/*
+.container-main, .about-grid, .panel, .card-main {
+  outline: 1px dashed rgba(255,255,255,0.06) !important;
+}
+*/
+
   </style>
 
 </head>
