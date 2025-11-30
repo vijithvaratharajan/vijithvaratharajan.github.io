@@ -199,6 +199,20 @@ body {
     0 0 5px rgba(225, 0, 255, 0.45);
 }
 
+    /* ensure inline images/icons match bootstrap-icon sizing and hover */
+.social-icons a img,
+.social-icons a svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+}
+.social-icons a:hover img,
+.social-icons a:hover svg {
+  transform: translateY(-3px);
+  opacity: 0.95;
+}
+
+
   </style>
 
 </head>
