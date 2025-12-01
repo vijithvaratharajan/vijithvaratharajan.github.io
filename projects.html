@@ -217,6 +217,16 @@
 .form-check-input:not(:checked) {
   border-color: var(--accent) !important;
 }
+
+.page-fade {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.page-fade.show {
+  opacity: 1;
+}
+
   </style>
 
 </head>
@@ -224,6 +234,8 @@
 <body>
 
   <div id="tsparticles"></div>
+
+<div class="page-fade" id="pageFadeWrapper">
 
   <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid px-4">
@@ -372,6 +384,31 @@
 
     loadGitHubProjects();
   </script>
+
+</div>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.getElementById("pageFadeWrapper");
+  wrapper.classList.add("show");
+
+  document.querySelectorAll("a[href]").forEach(link => {
+    const url = link.getAttribute("href");
+
+    if (url.startsWith("http") || link.target === "_blank") return;
+
+    link.addEventListener("click", e => {
+      e.preventDefault();
+
+      wrapper.classList.remove("show");
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 350);
+    });
+  });
+});
+</script>
 
 </body>
 
