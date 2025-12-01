@@ -182,35 +182,28 @@
   transition: transform 0.25s ease;
 }
 
-        /* ===== Purple Theme Toggle (Light Mode) ===== */
 
-/* Switch track when ON */
 .form-check-input:checked {
     background-color: #a200ff !important;
     border-color: #a200ff !important;
 }
 
-/* Switch thumb (the circle) when ON */
 .form-check-input:checked::before {
     background-color: #ffffff !important;
 }
 
-/* Optional: subtle glow when switching */
 .form-check-input:checked {
     box-shadow: 0 0 8px rgba(162, 0, 255, 0.5) !important;
 }
     
-/* Keep the switch purple even in dark mode */
 .form-check-input {
     accent-color: #a200ff !important;
 }
 
-    /* Fix checkbox/switch outline in dark mode */
 :root {
-  --accent: #e100ff; /* your purple */
+  --accent: #e100ff; 
 }
 
-/* When in dark mode, make switch border + focus shadow purple */
 .form-check-input:focus {
   border-color: var(--accent) !important;
   box-shadow: 0 0 0 0.25rem rgba(225, 0, 255, 0.35) !important;
