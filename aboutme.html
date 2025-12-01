@@ -197,14 +197,11 @@
     .btn-resume { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--text-color); padding:8px 12px; border-radius:10px; }
     .btn-resume:hover { background: rgba(225,0,255,0.06); color: #fff; }
 
-    /* ===== Fix: remove ghost background & restore centering ===== */
-/* 1) Ensure page background is the site background (not a big translucent card) */
 body {
   background: var(--bg) !important;
   color: var(--text-color) !important;
 }
 
-/* 2) Remove any accidental large background/backdrop on main wrappers */
 .container-main,
 .about-section,
 .section-wrapper,
@@ -221,7 +218,6 @@ body {
   margin: 0 !important;
 }
 
-/* 3) Restore the intended centered grid and limit width (keeps content centered) */
 .container-main {
   display: flex !important;
   justify-content: center !important;
@@ -230,7 +226,6 @@ body {
   box-sizing: border-box;
 }
 
-/* about-grid should be the content box: constrain width and center it */
 .about-grid {
   width: 100% !important;
   max-width: 1100px !important;
@@ -240,7 +235,6 @@ body {
   gap: 28px !important;
 }
 
-/* mobile fallback */
 @media (max-width: 980px) {
   .about-grid {
     grid-template-columns: 1fr !important;
@@ -248,7 +242,6 @@ body {
   }
 }
 
-/* 4) Ensure the left & right panels keep their glass style (no big parent overlay) */
 .panel,
 .card-main,
 .glass-card,
@@ -263,13 +256,11 @@ body {
   border-radius: 14px !important;
 }
 
-/* 5) If a wrapper still forces full-width left alignment, center it */
 .container-main > * {
   width: 100%;
   box-sizing: border-box;
 }
 
-/* 6) Fine tune: keep small elements from stretching full width */
 .panel .photo-wrap,
 .panel > div,
 .card-main {
@@ -297,12 +288,10 @@ body {
   color: var(--accent);
 }
 
-    /* Fix faint About-me lead paragraph */
 :root.light-mode .lead {
   color: rgba(0,0,0,0.78) !important;
 }
 
-    /* Purple timeline in light mode */
 :root.light-mode .timeline-item::before {
   background: #b300ff !important; /* deep purple */
   box-shadow: 0 0 6px rgba(179,0,255,0.25) !important;
@@ -312,35 +301,28 @@ body {
   background: rgba(0,0,0,0.15) !important;
 }
 
-        /* ===== Purple Theme Toggle (Light Mode) ===== */
 
-/* Switch track when ON */
 .form-check-input:checked {
     background-color: #a200ff !important;
     border-color: #a200ff !important;
 }
 
-/* Switch thumb (the circle) when ON */
 .form-check-input:checked::before {
     background-color: #ffffff !important;
 }
 
-/* Optional: subtle glow when switching */
 .form-check-input:checked {
     box-shadow: 0 0 8px rgba(162, 0, 255, 0.5) !important;
 }
     
-/* Keep the switch purple even in dark mode */
 .form-check-input {
     accent-color: #a200ff !important;
 }
 
-    /* Fix checkbox/switch outline in dark mode */
 :root {
-  --accent: #e100ff; /* your purple */
+  --accent: #e100ff; 
 }
 
-/* When in dark mode, make switch border + focus shadow purple */
 .form-check-input:focus {
   border-color: var(--accent) !important;
   box-shadow: 0 0 0 0.25rem rgba(225, 0, 255, 0.35) !important;
