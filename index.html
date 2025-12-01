@@ -245,6 +245,27 @@ body {
     accent-color: #a200ff !important;
 }
 
+    /* Fix checkbox/switch outline in dark mode */
+:root {
+  --accent: #e100ff; /* your purple */
+}
+
+/* When in dark mode, make switch border + focus shadow purple */
+.form-check-input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 0.25rem rgba(225, 0, 255, 0.35) !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+.form-check-input:not(:checked) {
+  border-color: var(--accent) !important;
+}
+
+
   </style>
 
 </head>
