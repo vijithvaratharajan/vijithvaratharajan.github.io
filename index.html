@@ -438,28 +438,13 @@ tsParticles.load("tsparticles", {
 
 </div>
 
-  <script>
+<script>
+    
 document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.getElementById("pageFadeWrapper");
   wrapper.classList.add("show");
-
-  document.querySelectorAll("a[href]").forEach(link => {
-    const url = link.getAttribute("href");
-
-    // Avoid external links or links with targets
-    if (url.startsWith("http") || link.target === "_blank") return;
-
-    link.addEventListener("click", e => {
-      e.preventDefault();
-
-      wrapper.classList.remove("show");
-
-      setTimeout(() => {
-        window.location.href = url;
-      }, 350);
-    });
-  });
 });
+
 </script>
 
 </body>
