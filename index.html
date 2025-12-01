@@ -255,7 +255,6 @@ body {
   border-color: var(--accent) !important;
 }
 
-    /* Page Fade Animation */
 .page-fade {
   opacity: 0;
   transition: opacity 0.45s ease;
@@ -444,7 +443,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const wrapper = document.getElementById("pageFadeWrapper");
   wrapper.classList.add("show");
 
-  // Fade-out effect when clicking internal links
   document.querySelectorAll("a[href]").forEach(link => {
     const url = link.getAttribute("href");
 
