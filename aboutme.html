@@ -297,6 +297,22 @@ body {
   color: var(--accent);
 }
 
+    /* Fix faint About-me lead paragraph */
+:root.light-mode .lead {
+  color: rgba(0,0,0,0.78) !important;
+}
+
+    /* Purple timeline in light mode */
+:root.light-mode .timeline-item::before {
+  background: #b300ff !important; /* deep purple */
+  box-shadow: 0 0 6px rgba(179,0,255,0.25) !important;
+}
+
+:root.light-mode .timeline-item::after {
+  background: rgba(0,0,0,0.15) !important;
+}
+
+
   </style>
 
 </head>
