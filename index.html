@@ -200,6 +200,28 @@ body {
     0 0 5px rgba(225, 0, 255, 0.45);
 }
 
+    /* ——— Quick contact icons fix ——— */
+:root.light-mode .social-icons a {
+  color: #000 !important;
+}
+:root.light-mode .social-icons a:hover {
+  color: var(--accent) !important;
+}
+
+/* ——— Subtitle / tagline fix ——— */
+:root.light-mode .small-meta,
+:root.light-mode .lead {
+  color: rgba(0,0,0,0.75) !important;
+}
+
+/* ——— Theme toggle icon fix ——— */
+#themeIcon {
+  color: var(--text-color) !important;
+}
+:root.light-mode #themeIcon {
+  color: #000 !important;
+}
+
   </style>
 
 </head>
