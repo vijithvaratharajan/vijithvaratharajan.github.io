@@ -10,49 +10,59 @@
   /* ── theme definitions ─────────────────────────────────────── */
   var THEMES = {
     nebula: {
-      accent:   '#e100ff',
-      particle: '#ff4dff',
-      bg:       '#0d001a',
-      bgGrad:   'linear-gradient(135deg,#1a002e 0%,#3c0055 40%,#000 100%)',
-      bgLight:  '#f5f2ff',
-      nav:      'linear-gradient(135deg,#2a0050,#4c0080,#2a0050)',
-      navLight: 'linear-gradient(135deg,#ffffff,#f3e8ff)'
+      accent:          '#e100ff',
+      accentSecondary: '#7a00ff',
+      accentGlow:      'rgba(225,0,255,0.4)',
+      particle:        '#ff4dff',
+      bg:              '#0d001a',
+      bgGrad:          'linear-gradient(135deg,#1a002e 0%,#3c0055 40%,#000 100%)',
+      bgLight:         '#f5f2ff',
+      nav:             'linear-gradient(135deg,#2a0050,#4c0080,#2a0050)',
+      navLight:        'linear-gradient(135deg,#ffffff,#f3e8ff)'
     },
     ocean: {
-      accent:   '#00d2ff',
-      particle: '#00b8e0',
-      bg:       '#001a28',
-      bgGrad:   'linear-gradient(135deg,#000f1a 0%,#001f38 40%,#000 100%)',
-      bgLight:  '#f0f8ff',
-      nav:      'linear-gradient(135deg,#001a38,#002855,#001a38)',
-      navLight: 'linear-gradient(135deg,#e8f8ff,#f0faff)'
+      accent:          '#00d2ff',
+      accentSecondary: '#0066cc',
+      accentGlow:      'rgba(0,210,255,0.4)',
+      particle:        '#00b8e0',
+      bg:              '#001a28',
+      bgGrad:          'linear-gradient(135deg,#000f1a 0%,#001f38 40%,#000 100%)',
+      bgLight:         '#f0f8ff',
+      nav:             'linear-gradient(135deg,#001a38,#002855,#001a38)',
+      navLight:        'linear-gradient(135deg,#e8f8ff,#f0faff)'
     },
     ember: {
-      accent:   '#ff6b2b',
-      particle: '#ff8c42',
-      bg:       '#1a0800',
-      bgGrad:   'linear-gradient(135deg,#100500 0%,#2a1000 40%,#000 100%)',
-      bgLight:  '#fff5f0',
-      nav:      'linear-gradient(135deg,#200800,#3a1500,#200800)',
-      navLight: 'linear-gradient(135deg,#fff8f5,#fff0e8)'
+      accent:          '#ff6b2b',
+      accentSecondary: '#cc4400',
+      accentGlow:      'rgba(255,107,43,0.4)',
+      particle:        '#ff8c42',
+      bg:              '#1a0800',
+      bgGrad:          'linear-gradient(135deg,#100500 0%,#2a1000 40%,#000 100%)',
+      bgLight:         '#fff5f0',
+      nav:             'linear-gradient(135deg,#200800,#3a1500,#200800)',
+      navLight:        'linear-gradient(135deg,#fff8f5,#fff0e8)'
     },
     forest: {
-      accent:   '#00e676',
-      particle: '#00c853',
-      bg:       '#001a0d',
-      bgGrad:   'linear-gradient(135deg,#000f08 0%,#002015 40%,#000 100%)',
-      bgLight:  '#f0fff4',
-      nav:      'linear-gradient(135deg,#001a0a,#002815,#001a0a)',
-      navLight: 'linear-gradient(135deg,#f0fff5,#e8ffef)'
+      accent:          '#00e676',
+      accentSecondary: '#00884d',
+      accentGlow:      'rgba(0,200,83,0.4)',
+      particle:        '#00c853',
+      bg:              '#001a0d',
+      bgGrad:          'linear-gradient(135deg,#000f08 0%,#002015 40%,#000 100%)',
+      bgLight:         '#f0fff4',
+      nav:             'linear-gradient(135deg,#001a0a,#002815,#001a0a)',
+      navLight:        'linear-gradient(135deg,#f0fff5,#e8ffef)'
     },
     crimson: {
-      accent:   '#ff1744',
-      particle: '#ff4465',
-      bg:       '#1a0008',
-      bgGrad:   'linear-gradient(135deg,#0f0003 0%,#250010 40%,#000 100%)',
-      bgLight:  '#fff0f2',
-      nav:      'linear-gradient(135deg,#200008,#350015,#200008)',
-      navLight: 'linear-gradient(135deg,#fff5f7,#ffecef)'
+      accent:          '#ff1744',
+      accentSecondary: '#aa0030',
+      accentGlow:      'rgba(255,23,68,0.4)',
+      particle:        '#ff4465',
+      bg:              '#1a0008',
+      bgGrad:          'linear-gradient(135deg,#0f0003 0%,#250010 40%,#000 100%)',
+      bgLight:         '#fff0f2',
+      nav:             'linear-gradient(135deg,#200008,#350015,#200008)',
+      navLight:        'linear-gradient(135deg,#fff5f7,#ffecef)'
     }
   };
 
@@ -74,8 +84,10 @@
     var r = document.documentElement;
     var light = r.classList.contains('light-mode');
 
-    r.style.setProperty('--accent',          t.accent);
-    r.style.setProperty('--particle-color',  t.particle);
+    r.style.setProperty('--accent',           t.accent);
+    r.style.setProperty('--accent-secondary', t.accentSecondary);
+    r.style.setProperty('--accent-glow',      t.accentGlow);
+    r.style.setProperty('--particle-color',   t.particle);
     r.style.setProperty('--bg-color',        light ? t.bgLight  : t.bg);
     r.style.setProperty('--bg',              light ? t.bgLight  : t.bgGrad);
     r.style.setProperty('--navbar-bg',       light ? t.navLight : t.nav);
