@@ -45,7 +45,7 @@
     }
 
     .navbar-custom {
-      background: var(--navbar-bg) !important;
+      background: var(--navbar-bg, linear-gradient(135deg, #2a0050, #4c0080, #2a0050));
       border-bottom: 1px solid rgba(255,255,255,0.2);
       box-shadow: 0 4px 18px rgba(0,0,0,0.5);
       z-index: 10;
@@ -198,6 +198,14 @@
         </label>
       </div>
 
+      <div class="color-theme-picker ms-2">
+        <button class="color-theme-dot" data-theme="nebula"  style="background:#e100ff" title="Nebula"></button>
+        <button class="color-theme-dot" data-theme="ocean"   style="background:#00d2ff" title="Ocean"></button>
+        <button class="color-theme-dot" data-theme="ember"   style="background:#ff6b2b" title="Ember"></button>
+        <button class="color-theme-dot" data-theme="forest"  style="background:#00e676" title="Forest"></button>
+        <button class="color-theme-dot" data-theme="crimson" style="background:#ff1744" title="Crimson"></button>
+      </div>
+
     </div>
   </div>
 </nav>
@@ -207,7 +215,13 @@
     <h2 class="fw-bold mb-3">Get in Touch</h2>
     <p class="mb-4">Feel free to contact me for anything  professional or academic related, collaborations, or just to say hello.</p>
 
-    <form action="mailto:vijithvrajan@gmail.com" method="POST" enctype="multipart/form-data">
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <!-- Replace YOUR_ACCESS_KEY with your key from web3forms.com (free, takes 30 seconds) -->
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+      <input type="hidden" name="subject" value="New message from vijithvaratharajan.github.io">
+      <input type="hidden" name="from_name" value="Website Contact Form">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
       <div class="mb-3">
         <label class="form-label">Name</label>
         <input type="text" name="name" class="form-control" required>
@@ -224,6 +238,8 @@
       </div>
 
       <button type="submit" class="btn btn-accent mt-2">Send Message</button>
+
+      <div id="form-result" class="mt-3" style="display:none; padding:10px 14px; border-radius:8px; font-size:0.9rem;"></div>
     </form>
 
     <hr class="my-4">
@@ -246,36 +262,75 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+<script src="theme.js"></script>
 <script>
-tsParticles.load("tsparticles", {
-  fullScreen: { enable: false },
-  background: { color: "transparent" },
-  particles: {
-    number: { value: 120, density: { enable: true, area: 800 } },
-    color: { value: "#ff4dff" },
-    shape: { type: "circle" },
-    opacity: { value: 0.6 },
-    size: { value: { min: 1, max: 4 } },
-    links: {
-      enable: true,
-      color: "#ff4dff",
-      distance: 150,
-      opacity: 0.4,
-      width: 1
-    },
-    move: {
-      enable: true,
-      speed: 0.8,
-      outModes: "bounce"
-    }
-  },
-  interactivity: {
-    events: {
-      onHover: { enable: true, mode: "repulse" },
-      onClick: { enable: true, mode: "push" }
-    }
+(function(){
+  var color = (window._colorThemeData && window._colorThemeData.particle) || '#ff4dff';
+  function initParticles(c){
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 120, density: { enable: true, area: 800 } },
+        color: { value: c },
+        shape: { type: "circle" },
+        opacity: { value: 0.6 },
+        size: { value: { min: 1, max: 4 } },
+        links: { enable: true, color: c, distance: 150, opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 0.8, outModes: "bounce" }
+      },
+      interactivity: {
+        events: { onHover: { enable: true, mode: "repulse" }, onClick: { enable: true, mode: "push" } }
+      }
+    });
   }
-});
+  window.reloadParticles = function(c){
+    var existing = tsParticles.domItem(0);
+    if(existing) existing.destroy();
+    initParticles(c || '#ff4dff');
+  };
+  initParticles(color);
+})();
+</script>
+
+<script>
+  /* ── contact form (Web3Forms) ── */
+  document.getElementById('contact-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn  = this.querySelector('button[type="submit"]');
+    const result = document.getElementById('form-result');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    result.style.display = 'none';
+
+    try {
+      const res  = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { Accept: 'application/json' }
+      });
+      const json = await res.json();
+      if (json.success) {
+        result.style.background = 'rgba(0,230,118,0.12)';
+        result.style.color      = '#00e676';
+        result.style.border     = '1px solid rgba(0,230,118,0.3)';
+        result.textContent = "Message sent! I'll get back to you soon.";
+        this.reset();
+      } else {
+        throw new Error(json.message);
+      }
+    } catch(err) {
+      result.style.background = 'rgba(255,55,55,0.12)';
+      result.style.color      = '#ff5555';
+      result.style.border     = '1px solid rgba(255,55,55,0.3)';
+      result.textContent = 'Something went wrong. Please email me directly at vijithvrajan@gmail.com.';
+    }
+
+    result.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -307,6 +362,8 @@ tsParticles.load("tsparticles", {
       themeIcon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
       localStorage.setItem("theme", "dark");
     }
+
+    if (typeof window.reapplyColorTheme === 'function') window.reapplyColorTheme();
   });
 </script>
 

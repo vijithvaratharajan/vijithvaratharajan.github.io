@@ -55,12 +55,12 @@
     }
 
     .navbar-custom {
-      background: linear-gradient(135deg, #2a0050, #4c0080, #2a0050);
+      background: var(--navbar-bg, linear-gradient(135deg, #2a0050, #4c0080, #2a0050));
       border-bottom: 1px solid rgba(255,255,255,0.2);
       z-index: 10;
     }
     :root.light-mode .navbar-custom {
-      background: linear-gradient(135deg, #ffffff, #f3e8ff);
+      background: var(--navbar-bg, linear-gradient(135deg, #ffffff, #f3e8ff));
       border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
@@ -229,11 +229,20 @@
   opacity: 1;
 }
 
+.theme-flash {
+  position: fixed; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.8), rgba(255,255,255,0) 70%);
+  opacity: 0; animation: flashAnim 0.5s ease-out; z-index: 9999;
+}
+@keyframes flashAnim { from { opacity: 0.8; } to { opacity: 0; } }
+
   </style>
 
 </head>
 
 <body>
+
+  <div id="themeFlash"></div>
 
   <div id="tsparticles"></div>
 
@@ -255,6 +264,15 @@
           <input class="form-check-input" type="checkbox" id="themeToggle">
           <label class="form-check-label" for="themeToggle"><i class="bi bi-sun-fill" id="themeIcon"></i></label>
         </div>
+
+        <div class="color-theme-picker ms-2">
+          <button class="color-theme-dot" data-theme="nebula"  style="background:#e100ff" title="Nebula"></button>
+          <button class="color-theme-dot" data-theme="ocean"   style="background:#00d2ff" title="Ocean"></button>
+          <button class="color-theme-dot" data-theme="ember"   style="background:#ff6b2b" title="Ember"></button>
+          <button class="color-theme-dot" data-theme="forest"  style="background:#00e676" title="Forest"></button>
+          <button class="color-theme-dot" data-theme="crimson" style="background:#ff1744" title="Crimson"></button>
+        </div>
+
       </div>
     </div>
   </nav>
@@ -302,17 +320,28 @@
 
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
+  <script src="theme.js"></script>
+
   <script>
 
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
+    const themeFlash = document.getElementById('themeFlash');
+
     if (localStorage.getItem('theme') === 'light') {
       document.documentElement.classList.add('light-mode');
       themeToggle.checked = true;
       themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
     }
+
+    function playFlash(){
+      themeFlash.classList.add('theme-flash');
+      setTimeout(() => themeFlash.classList.remove('theme-flash'), 500);
+    }
+
     themeToggle.addEventListener('change', () => {
       document.documentElement.classList.toggle('light-mode');
+      playFlash();
       if (document.documentElement.classList.contains('light-mode')) {
         themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
         localStorage.setItem('theme', 'light');
@@ -320,36 +349,38 @@
         themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
         localStorage.setItem('theme', 'dark');
       }
+      if (typeof window.reapplyColorTheme === 'function') window.reapplyColorTheme();
     });
 
-    tsParticles.load("tsparticles", {
-      fullScreen: { enable: false },
-      background: { color: "transparent" },
-      particles: {
-        number: { value: 120, density: { enable: true, area: 800 } },
-        color: { value: getComputedStyle(document.documentElement).getPropertyValue('--particle-color') || '#ff4dff' },
-        shape: { type: "circle" },
-        opacity: { value: 0.7 },
-        size: { value: { min: 1, max: 4 } },
-        links: {
-          enable: true,
-          color: getComputedStyle(document.documentElement).getPropertyValue('--particle-color') || '#ff4dff',
-          distance: 150,
-          opacity: 0.4,
-          width: 1
-        },
-        move: { enable: true, speed: 0.8, outModes: "bounce" }
-      },
-      interactivity: {
-        events: {
-          onHover: { enable: true, mode: "repulse" },
-          onClick: { enable: true, mode: "push" }
-        },
-        modes: { repulse: { distance: 120 }, push: { quantity: 3 } }
-      },
-      detectRetina: true
-    });
-
+    (function(){
+      var color = (window._colorThemeData && window._colorThemeData.particle) || '#ff4dff';
+      function initParticles(c){
+        tsParticles.load("tsparticles", {
+          fullScreen: { enable: false },
+          background: { color: "transparent" },
+          particles: {
+            number: { value: 120, density: { enable: true, area: 800 } },
+            color: { value: c },
+            shape: { type: "circle" },
+            opacity: { value: 0.7 },
+            size: { value: { min: 1, max: 4 } },
+            links: { enable: true, color: c, distance: 150, opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 0.8, outModes: "bounce" }
+          },
+          interactivity: {
+            events: { onHover: { enable: true, mode: "repulse" }, onClick: { enable: true, mode: "push" } },
+            modes: { repulse: { distance: 120 }, push: { quantity: 3 } }
+          },
+          detectRetina: true
+        });
+      }
+      window.reloadParticles = function(c){
+        var existing = tsParticles.domItem(0);
+        if(existing) existing.destroy();
+        initParticles(c || '#ff4dff');
+      };
+      initParticles(color);
+    })();
 
     async function loadGitHubProjects() {
       const username = 'vijithvaratharajan';
