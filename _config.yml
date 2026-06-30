@@ -1,0 +1,20 @@
+title: Vijith Varatharajan
+description: Researcher in Digital Game-Based Language Learning and Second Language Acquisition
+url: "https://vijithvaratharajan.github.io"
+baseurl: ""
+
+# Individual post URLs: /blog/YYYY/MM/DD/title/
+permalink: /blog/:year/:month/:day/:title/
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Exclude files Jekyll should not try to build into the site
+exclude:
+  - README.md
+  - "*.json"
+  - seen_papers.json
