@@ -1,0 +1,311 @@
+---
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <title>Blog — Vijith Varatharajan</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --accent: #e100ff;
+      --bg: linear-gradient(135deg, #1a002e 0%, #3c0055 40%, #000 100%);
+      --bg-color: #0d001a;
+      --text-color: #e6e6f0;
+      --card-bg: rgba(255,255,255,0.06);
+      --navbar-bg: linear-gradient(135deg, #2a0050, #4c0080, #2a0050);
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      overflow-x: hidden;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    #tsparticles {
+      position: fixed;
+      inset: 0;
+      z-index: 0 !important;
+      pointer-events: none;
+      opacity: 1 !important;
+    }
+
+    /* ── navbar ── */
+    .navbar-custom {
+      background: var(--navbar-bg, linear-gradient(135deg, #2a0050, #4c0080, #2a0050));
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      z-index: 12;
+      position: relative;
+    }
+    .navbar-custom .nav-link {
+      color: #f2d9ff !important;
+      font-weight: 500;
+    }
+    .navbar-custom .nav-link:hover {
+      color: var(--accent, #ff66ff) !important;
+    }
+
+    /* ── theme flash ── */
+    .theme-flash {
+      position: fixed; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.85), rgba(255,255,255,0) 70%);
+      opacity: 0; animation: flashAnim 0.5s ease-out; z-index: 9999;
+    }
+    @keyframes flashAnim { from { opacity: 0.8; } to { opacity: 0; } }
+
+    /* ── page wrapper ── */
+    .container-main {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      padding: 80px 20px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .blog-container {
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .blog-heading {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .blog-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 48px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── post preview cards ── */
+    .post-preview {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 30px 34px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .post-preview:hover {
+      border-color: rgba(225,0,255,0.35);
+      transform: translateY(-2px);
+    }
+
+    .post-preview-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .post-preview-title a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .post-preview-title a:hover {
+      color: var(--accent);
+    }
+
+    .post-preview-date {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    .post-preview-excerpt {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .read-more {
+      font-size: 0.82rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .read-more:hover { opacity: 0.8; color: var(--accent); }
+
+    .empty-state {
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      padding: 80px 0;
+      font-size: 0.9rem;
+    }
+
+    /* ── light mode ── */
+    :root.light-mode {
+      --bg-color: #f5f2ff;
+      --text-color: #24002f;
+      --card-bg: rgba(255,255,255,0.92);
+      --navbar-bg: linear-gradient(135deg, #ffffff, #f3e8ff);
+    }
+    :root.light-mode html,
+    :root.light-mode body { background: var(--bg-color); color: var(--text-color); }
+    :root.light-mode .navbar-custom { border-bottom: 1px solid rgba(0,0,0,0.08); }
+    :root.light-mode .navbar-custom .nav-link { color: #4a006a !important; }
+    :root.light-mode .post-preview {
+      background: rgba(255,255,255,0.85);
+      border-color: rgba(0,0,0,0.08);
+    }
+    :root.light-mode .post-preview:hover { border-color: rgba(225,0,255,0.3); }
+    :root.light-mode .post-preview-title a { color: #1a001f; }
+    :root.light-mode .post-preview-date { color: rgba(0,0,0,0.38); }
+    :root.light-mode .post-preview-excerpt { color: rgba(0,0,0,0.6); }
+    :root.light-mode .blog-heading { color: #1a001f; }
+    :root.light-mode .blog-sub { color: rgba(0,0,0,0.4); }
+    :root.light-mode .empty-state { color: rgba(0,0,0,0.3); }
+  </style>
+</head>
+<body>
+
+<div id="themeFlash"></div>
+<div id="tsparticles"></div>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid px-4">
+    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navmenuBlog">
+      <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navmenuBlog">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link px-3" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="aboutme.html">About Me</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="projects.html">My Works</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link px-3 active" href="writings.html">Blog</a></li>
+      </ul>
+
+      <div class="form-check form-switch ms-3">
+        <input class="form-check-input" type="checkbox" id="themeToggle">
+        <label class="form-check-label text-light" for="themeToggle">
+          <i class="bi bi-sun-fill" id="themeIcon"></i>
+        </label>
+      </div>
+
+      <div class="color-theme-picker ms-2">
+        <button class="color-theme-dot" data-theme="nebula"  style="background:#e100ff" title="Nebula"></button>
+        <button class="color-theme-dot" data-theme="ocean"   style="background:#00d2ff" title="Ocean"></button>
+        <button class="color-theme-dot" data-theme="ember"   style="background:#ff6b2b" title="Ember"></button>
+        <button class="color-theme-dot" data-theme="forest"  style="background:#00e676" title="Forest"></button>
+        <button class="color-theme-dot" data-theme="crimson" style="background:#ff1744" title="Crimson"></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container-main">
+  <div class="blog-container">
+
+    <h1 class="blog-heading">Blog</h1>
+    <p class="blog-sub">Notes on research, language learning, and games</p>
+
+    {% if site.posts.size == 0 %}
+    <div class="empty-state">
+      <p>No posts yet. Check back soon.</p>
+    </div>
+    {% else %}
+    {% for post in site.posts %}
+    <article class="post-preview">
+      <h2 class="post-preview-title">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </h2>
+      <p class="post-preview-date">{{ post.date | date: "%-d %B %Y" }}</p>
+      <p class="post-preview-excerpt">{{ post.excerpt | strip_html | truncate: 260 }}</p>
+      <a class="read-more" href="{{ post.url }}">Read post →</a>
+    </article>
+    {% endfor %}
+    {% endif %}
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script src="theme.js"></script>
+<script>
+(function(){
+  var color = (window._colorThemeData && window._colorThemeData.particle) || '#ff4dff';
+  function initParticles(c){
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 80, density: { enable: true, area: 900 } },
+        color: { value: c },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: { min: 1, max: 3 } },
+        links: { enable: true, color: c, distance: 150, opacity: 0.3, width: 1 },
+        move: { enable: true, speed: 0.6, outModes: "bounce" }
+      },
+      interactivity: {
+        events: { onHover: { enable: true, mode: "repulse" } },
+        modes: { repulse: { distance: 100 } }
+      },
+      detectRetina: true
+    });
+  }
+  window.reloadParticles = function(c){
+    var existing = tsParticles.domItem(0);
+    if(existing) existing.destroy();
+    initParticles(c || '#ff4dff');
+  };
+  initParticles(color);
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  var themeToggle = document.getElementById("themeToggle");
+  var themeIcon   = document.getElementById("themeIcon");
+  var themeFlash  = document.getElementById("themeFlash");
+
+  if (localStorage.getItem("theme") === "light") {
+    document.documentElement.classList.add("light-mode");
+    themeToggle.checked = true;
+    themeIcon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
+  }
+
+  function playFlash() {
+    themeFlash.classList.add("theme-flash");
+    setTimeout(function(){ themeFlash.classList.remove("theme-flash"); }, 500);
+  }
+
+  themeToggle.addEventListener("change", function() {
+    document.documentElement.classList.toggle("light-mode");
+    playFlash();
+    if (document.documentElement.classList.contains("light-mode")) {
+      themeIcon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
+      localStorage.setItem("theme", "light");
+    } else {
+      themeIcon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
+      localStorage.setItem("theme", "dark");
+    }
+    if (typeof window.reapplyColorTheme === "function") window.reapplyColorTheme();
+  });
+</script>
+
+</body>
+</html>
